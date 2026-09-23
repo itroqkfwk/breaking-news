@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>[속보] 취준생 연락두절 사건 긴급 보도 - KBN 뉴스특보</title>
+  <meta property="og:title" content="[속보] 취준하느라 바빠서 안 놀아주는 친구 긴급 고발">
+  <meta property="og:description" content="섭섭해서 속보까지 냈지만 사실 진심으로 취뽀 응원하는 친구들의 감동 성명서">
+  <meta property="og:image" content="anchor.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070c14;
+      --card-bg: #0e1726;
+      --card-inner: #152238;
+      --news-red: #e50914;
+      --news-red-glow: rgba(229, 9, 20, 0.4);
+      --news-blue: #0066ff;
+      --news-yellow: #ffd600;
+      --text: #ffffff;
+      --text-sub: #94a3b8;
+      --border: rgba(255, 255, 255, 0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 10% 15%, rgba(0, 102, 255, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 85%, rgba(229, 9, 20, 0.12) 0%, transparent 45%),
+        linear-gradient(180deg, #070c14 0%, #03060a 100%);
+      background-attachment: fixed;
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+      padding-bottom: 80px;
+    }
+
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Top Breaking Ticker */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #b70000;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(183, 0, 0, 0.4);
+      height: 44px;
+      overflow: hidden;
+    }
+
+    .ticker-badge {
+      background: #800000;
+      font-weight: 900;
+      font-size: 0.85rem;
+      padding: 0 16px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      letter-spacing: -0.3px;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      background: #ffd600;
+      border-radius: 50%;
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.3; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1.2); }
+    }
+
+    .ticker-content {
+      flex: 1;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .ticker-track {
+      display: inline-block;
+      padding-left: 100%;
+      animation: ticker-slide 28s linear infinite;
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+
+    @keyframes ticker-slide {
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-100%, 0, 0); }
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+
+    /* Sound Control Button */
+    .sound-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 18px;
+      z-index: 2000;
+      background: rgba(14, 23, 38, 0.9);
+      backdrop-filter: blur(8px);
+      border: 1.5px solid var(--news-red);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 30px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(229, 9, 20, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Name Customizer Banner */
+    .name-customizer {
+      background: rgba(21, 34, 56, 0.85);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .customizer-label {
+      font-size: 0.82rem;
+      color: var(--text-sub);
+      font-weight: 600;
+    }
+
+    .customizer-input-box {
+      display: flex;
+      gap: 8px;
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .name-input {
+      flex: 1;
+      background: #080e1a;
+      border: 1.5px solid rgba(0, 102, 255, 0.4);
+      border-radius: 8px;
+      color: #fff;
+      padding: 7px 12px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      outline: none;
+    }
+
+    .name-input:focus {
+      border-color: var(--news-blue);
+      box-shadow: 0 0 10px rgba(0, 102, 255, 0.4);
+    }
+
+    .name-btn {
+      background: var(--news-blue);
+      color: #fff;
+      border: none;
+      padding: 0 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    /* Main News Header */
+    .news-header {
+      margin-bottom: 22px;
+    }
+
+    .channel-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 102, 255, 0.15);
+      border: 1px solid var(--news-blue);
+      color: #38bdf8;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .main-headline {
+      font-size: clamp(1.6rem, 6.5vw, 2.2rem);
+      font-weight: 900;
+      line-height: 1.3;
+      color: #fff;
+      margin-bottom: 8px;
+      word-break: keep-all;
+    }
+
+    .main-headline .highlight {
+      color: var(--news-yellow);
+      background: rgba(255, 214, 0, 0.1);
+      padding: 0 4px;
+      border-radius: 4px;
+    }
+
+    .headline-sub {
+      font-size: clamp(0.92rem, 3.6vw, 1.05rem);
+      color: #94a3b8;
+      word-break: keep-all;
+    }
+
+    /* Broadcast Video Frame */
+    .news-screen-card {
+      background: #000;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 2px solid var(--border);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 102, 255, 0.2);
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .screen-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .screen-overlay {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(229, 9, 20, 0.95);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.76rem;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .screen-bottom-bar {
+      background: linear-gradient(180deg, rgba(8, 14, 26, 0.85) 0%, rgba(8, 14, 26, 0.98) 100%);
+      padding: 14px 16px;
+      border-top: 1.5px solid rgba(229, 9, 20, 0.6);
+    }
+
+    .lower-third-sub {
+      font-size: 0.78rem;
+      color: var(--news-yellow);
+      font-weight: 800;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .lower-third-main {
+      font-size: clamp(1rem, 4.2vw, 1.18rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.35;
+      word-break: keep-all;
+    }
+
+    /* Section Cards */
+    .report-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px 18px;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .report-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .badge-report {
+      background: var(--news-blue);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .report-heading {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #fff;
+      word-break: keep-all;
+    }
+
+    .report-text {
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+      word-break: keep-all;
+    }
+
+    .report-text strong {
+      color: #fff;
+    }
+
+    /* Image Box in Report */
+    .report-media-box {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      margin: 14px 0 10px 0;
+      position: relative;
+    }
+
+    .report-media-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .media-caption {
+      background: rgba(14, 23, 38, 0.95);
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      color: #94a3b8;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      word-break: keep-all;
+    }
+
+    /* Infographic / Chart Styles */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .stat-item {
+      background: var(--card-inner);
+      padding: 14px 16px;
+      border-radius: 12px;
+      border-left: 4px solid var(--news-blue);
+    }
+
+    .stat-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .stat-pct {
+      color: var(--news-yellow);
+      font-weight: 900;
+    }
+
+    .progress-bar-bg {
+      background: rgba(255, 255, 255, 0.1);
+      height: 10px;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--news-blue), #38bdf8);
+      border-radius: 6px;
+    }
+
+    .progress-bar-fill.red {
+      background: linear-gradient(90deg, #b70000, #ff5252);
+    }
+
+    .progress-bar-fill.gold {
+      background: linear-gradient(90deg, #ff9100, #ffd600);
+    }
+
+    /* Official Statement Box */
+    .statement-card {
+      background: radial-gradient(circle at top left, rgba(255, 214, 0, 0.08) 0%, rgba(14, 23, 38, 0.95) 70%);
+      border: 2px solid rgba(255, 214, 0, 0.35);
+      border-radius: 20px;
+      padding: 24px 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+      position: relative;
+    }
+
+    .statement-badge {
+      display: inline-block;
+      background: rgba(255, 214, 0, 0.2);
+      border: 1px solid var(--news-yellow);
+      color: var(--news-yellow);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .statement-title {
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 16px;
+      word-break: keep-all;
+    }
+
+    .statement-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .statement-list li {
+      position: relative;
+      padding-left: 20px;
+      font-size: 0.94rem;
+      color: #e2e8f0;
+      line-height: 1.6;
+      word-break: keep-all;
+    }
+
+    .statement-list li::before {
+      content: "•";
+      position: absolute;
+      left: 6px;
+      color: var(--news-yellow);
+      font-weight: 900;
+      font-size: 1.2rem;
+      top: -2px;
+    }
+
+    .statement-closing {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.15);
+      text-align: center;
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: #38bdf8;
+      word-break: keep-all;
+    }
+
+    /* Interactive Funding & Cheer Box */
+    .cheer-box {
+      background: linear-gradient(135deg, rgba(229, 9, 20, 0.2) 0%, rgba(14, 23, 38, 0.9) 100%);
+      border: 2px solid var(--news-red);
+      border-radius: 20px;
+      padding: 24px 18px;
+      text-align: center;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(229, 9, 20, 0.25);
+    }
+
+    .cheer-label {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #ff8a80;
+      margin-bottom: 6px;
+    }
+
+    .cheer-counter {
+      font-size: clamp(2.6rem, 10vw, 3.8rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.1;
+      margin: 8px 0;
+      text-shadow: 0 0 20px var(--news-red-glow);
+    }
+
+    .cheer-detail-row {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      font-size: 0.85rem;
+      color: var(--text-sub);
+    }
+
+    .cheer-detail-item strong {
+      color: var(--news-yellow);
+    }
+
+    .cheer-btn {
+      background: linear-gradient(135deg, #e50914, #ff334b);
+      color: #fff;
+      border: none;
+      padding: 16px 36px;
+      border-radius: 50px;
+      font-size: clamp(1.05rem, 4.5vw, 1.22rem);
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(229, 9, 20, 0.5);
+      transition: transform 0.1s, box-shadow 0.1s;
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .cheer-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* Footer & Share */
+    .footer {
+      text-align: center;
+      padding: 24px 16px;
+      background: rgba(14, 23, 38, 0.7);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+    }
+
+    .share-btn {
+      background: #0066ff;
+      color: #fff;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+      margin-top: 8px;
+      transition: background 0.2s;
+    }
+
+    .share-btn:hover {
+      background: #0052cc;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #111e33;
+      border: 1.5px solid #0066ff;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.8);
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Breaking News Bar -->
+  <div class="top-bar">
+    <div class="ticker-badge">
+      <span class="live-dot"></span>
+      뉴스속보
+    </div>
+    <div class="ticker-content">
+      <div class="ticker-track">
+        [속보] 20대 청년, "취준해야 한다"며 친구 모임 3개월 연속 불참 선언... 친구 대책위 '엄중 경고' &nbsp;&nbsp;•&nbsp;&nbsp;
+        [현장] 스터디카페 앞 빈 핫식스 캔 3개 발견... 생존 및 열공 흔적 확인돼 &nbsp;&nbsp;•&nbsp;&nbsp;
+        [성명] 친구 일동 "솔직히 섭섭해서 속보 냈지만, 합격할 때까지 숨죽여 기다린다" 대인배 합의 발표 &nbsp;&nbsp;•&nbsp;&nbsp;
+        [조건부 합의] 취뽀 성공 시 첫 월급으로 소고기 풀코스에 소맥 회식 만장일치 통과 &nbsp;&nbsp;•&nbsp;&nbsp;
+      </div>
+    </div>
+  </div>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="container">
+
+    <!-- Name Customizer -->
+    <div class="name-customizer">
+      <div class="customizer-label">주인공 친구 이름 변경</div>
+      <div class="customizer-input-box">
+        <input type="text" id="targetInput" class="name-input" placeholder="이름 입력 (예: 소하준)" value="소하준">
+        <button class="name-btn" onclick="applyCustomName()">적용</button>
+      </div>
+    </div>
+
+    <!-- Main Headline Header -->
+    <header class="news-header">
+      <div class="channel-tag">
+        <span>KBN 24 긴급특보</span>
+        <span>|</span>
+        <span id="liveTime">2026.09.23 LIVE</span>
+      </div>
+      <h1 class="main-headline">
+        [단독] <span class="highlight target-name">소하준</span> 청년, '취준' 빌미로 연쇄 잠적... 친구들 긴급 성명 발표
+      </h1>
+      <p class="headline-sub">
+        부르면 5분 만에 튀어나오던 절친의 실종... 독서실에서 핫식스 마시며 자소서 작성 중인 현장 포착
+      </p>
+    </header>
+
+    <!-- Broadcast Screen Box 1: Studio Anchor -->
+    <section class="news-screen-card">
+      <div class="screen-overlay">
+        <span class="live-dot"></span> LIVE 뉴스스튜디오
+      </div>
+      <img src="anchor.jpg" alt="뉴스 스튜디오 앵커" class="screen-img">
+      <div class="screen-bottom-bar">
+        <div class="lower-third-sub">단독 보도 | 취준생 연락두절 사건 전말</div>
+        <div class="lower-third-main">
+          "바빠서 못 논다"... <span class="target-name">소하준</span> 군의 연쇄 잠적에 친구들 분통 속 '합격 기원'
+        </div>
+      </div>
+    </section>
+
+    <!-- Anchor Opening Report -->
+    <article class="report-card">
+      <div class="report-title-row">
+        <span class="badge-report">앵커 리포트</span>
+        <h2 class="report-heading">"주말 약속 잡으면 '인강 들어야 해' 칼거절"</h2>
+      </div>
+      <p class="report-text">
+        시청자 여러분 안녕하십니까. KBN 긴급 뉴스특보입니다.<br><br>
+        주말마다 피시방과 맛집을 휩쓸며 단체 카톡방 화력을 책임지던 20대 청년 <strong><span class="target-name">소하준</span></strong> 군이 최근 수개월째 친구들의 부름에 일절 응하지 않고 있어 주변인들의 거센 반발을 사고 있습니다.<br><br>
+        친구들의 제보에 따르면 "주말에 밥 한 끼 먹자"는 제안에 <strong>"자소서 써야 해서 이번 주는 패스"</strong>, "밤에 롤 한판만 하자"는 간청에는 <strong>"내일 아침 모의고사 풀어야 해"</strong>라며 칼같이 거절하는 등 철벽 방어를 이어가고 있는 것으로 밝혀졌습니다.
+      </p>
+    </article>
+
+    <!-- Broadcast Screen Box 2: Field Reporter -->
+    <section class="news-screen-card">
+      <div class="screen-overlay">
+        <span class="live-dot"></span> 현장 생중계 연결
+      </div>
+      <img src="reporter.jpg" alt="현장 취재 기자" class="screen-img">
+      <div class="screen-bottom-bar">
+        <div class="lower-third-sub">현장 연결 | 불 꺼지지 않는 스터디카페 앞</div>
+        <div class="lower-third-main">
+          새벽 2시까지 문제집 사투... <span class="target-name">소하준</span> 군의 치열한 취준 현장
+        </div>
+      </div>
+    </section>
+
+    <!-- Reporter In-depth Report -->
+    <article class="report-card">
+      <div class="report-title-row">
+        <span class="badge-report">현장 취재</span>
+        <h2 class="report-heading">CCTV 단독 입수: 책상 위 핫식스 3캔과 NCS 문제집</h2>
+      </div>
+      <p class="report-text">
+        취재진이 단독 입수한 스터디카페 내부 영상에 따르면, <span class="target-name">소하준</span> 군은 어두운 독서실 책상 조명 아래 NCS와 토익 수험서를 산더미처럼 쌓아두고 피 말리는 싸움을 이어가고 있었습니다.
+      </p>
+      <div class="report-media-box">
+        <img src="suspect.jpg" alt="독서실 열공 현장" class="report-media-img">
+        <div class="media-caption">
+          [단독 입수] 서울 모 스터디카페에서 포착된 <span class="target-name">소하준</span> 군의 생존 확인 샷 (피로에 지쳤지만 눈빛만은 살아있음)
+        </div>
+      </div>
+      <p class="report-text" style="margin-top: 12px;">
+        과거 친구들과 산 데크길을 누비며 해맑게 더블 브이를 그리던 평화로운 모습은 온데간데없고, 노트북 화면에 뜬 자기소개서 지원동기 3문단을 붙잡고 턱을 괸 채 고뇌하는 처절한 모습이 확인되었습니다.
+      </p>
+      <div class="report-media-box">
+        <img src="past_happy.png" alt="과거 잘 놀아주던 시절" class="report-media-img">
+        <div class="media-caption">
+          [자료화면] 친구들과 신나게 놀러 다니던 시절의 <span class="target-name">소하준</span> 씨... 친구들 일동 "저 미소가 그립다"
+        </div>
+      </div>
+    </article>
+
+    <!-- Infographics -->
+    <article class="report-card">
+      <div class="report-title-row">
+        <span class="badge-report">데이터 분석</span>
+        <h2 class="report-heading">친구 모임 불참 사유 & 친구들 심경 여론조사</h2>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-item">
+          <div class="stat-label-row">
+            <span>1위: 자소서 지원동기 및 포부 고민 중</span>
+            <span class="stat-pct">68%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill red" style="width: 68%;"></div>
+          </div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-label-row">
+            <span>2위: 자격증 기출문제 5개년 회독 중</span>
+            <span class="stat-pct">21%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" style="width: 21%;"></div>
+          </div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-label-row">
+            <span>3위: 독서실에서 엎드렸다가 기절 숙면</span>
+            <span class="stat-pct">8%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill gold" style="width: 8%;"></div>
+          </div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-label-row">
+            <span>친구들 심경: 섭섭함 (롤 5인큐 한 자리 빔)</span>
+            <span class="stat-pct">95%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill red" style="width: 95%;"></div>
+          </div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-label-row">
+            <span>친구들 심경: 취뽀하면 첫 월급으로 소고기 쏘겠지?</span>
+            <span class="stat-pct">100% (만장일치)</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill gold" style="width: 100%;"></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Friends Official Statement (Heartwarming & Funny) -->
+    <section class="statement-card">
+      <div class="statement-badge">대국민 공식 성명서</div>
+      <h2 class="statement-title">
+        친구 대책 위원회 "섭섭해서 뉴스까지 냈지만, 합격할 때까지 숨죽여 기다린다"
+      </h2>
+      <ul class="statement-list">
+        <li>
+          <strong>제1조 (서운함 고지):</strong> 안 놀아줘서 솔직히 킹받고 심심해서 이딴 고퀄리티 뉴스속보 웹페이지까지 만들었다.
+        </li>
+        <li>
+          <strong>제2조 (현실 인정과 진심):</strong> 하지만 네가 얼마나 간절하게 밤새우며 달리고 있는지 누구보다 잘 알고 있다.
+        </li>
+        <li>
+          <strong>제3조 (무조건적 응원):</strong> 친구들 눈치 전혀 보지 말고, 오직 네 목표와 합격 통지서만을 향해 앞만 보고 직진해라.
+        </li>
+        <li>
+          <strong>제4조 (종전 및 축하 협정):</strong> 단, 최종 합격하는 날 첫 월급으로 한우 1++ 소고기 풀코스에 소맥 말아먹는 것은 대한민국 헌법에 명시된 불가역적 합의다.
+        </li>
+      </ul>
+      <div class="statement-closing">
+        "기죽지 말고 끝까지 힘내라 <span class="target-name">소하준</span>! 합격하고 당당하게 나와라!"
+      </div>
+    </section>
+
+    <!-- Interactive Cheer & Beef Funding Clicker -->
+    <section class="cheer-box">
+      <div class="cheer-label">실시간 취뽀 합격 기운 & 소고기 적립 펀딩</div>
+      <div class="cheer-counter" id="cheerCount">7,770 HP</div>
+      <div class="cheer-detail-row">
+        <div class="cheer-detail-item">서운함 해소율: <strong id="reliefRate">99.8%</strong></div>
+        <div class="cheer-detail-item">소고기 적립: <strong id="beefGram">1,500g</strong></div>
+      </div>
+      <button class="cheer-btn" onclick="cheerUp()">
+        취뽀 응원 기운 팍팍 불어넣기
+      </button>
+    </section>
+
+    <!-- Footer & Share -->
+    <footer class="footer">
+      <p style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 8px;">
+        열심히 취준하는 친구에게 링크를 보내서 감동과 웃음을 선물하세요.
+      </p>
+      <button class="share-btn" onclick="shareNews()">
+        속보 링크 복사해서 친구에게 보내기
+      </button>
+    </footer>
+
+  </div>
+
+  <div id="toast" class="toast">속보 링크 복사 완료! 친구에게 보내보세요.</div>
+
+  <!-- Sound Toggle Button -->
+  <button class="sound-btn" onclick="toggleAudio()">
+    <span id="soundIcon">사운드 ON</span>
+  </button>
+
+  <script>
+    // Audio Synthesizer (News Chime & Jingle)
+    let audioEnabled = true;
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function toggleAudio() {
+      audioEnabled = !audioEnabled;
+      document.getElementById('soundIcon').innerText = audioEnabled ? '사운드 ON' : '사운드 OFF';
+    }
+
+    function playNewsJingle() {
+      if (!audioEnabled) return;
+      try {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const now = audioCtx.currentTime;
+
+        // News alert chord (D - F# - A - D)
+        const notes = [293.66, 369.99, 440.00, 587.33];
+        notes.forEach((freq, idx) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+          gain.gain.setValueAtTime(0.12, now + idx * 0.08);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.3);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now + idx * 0.08);
+          osc.stop(now + idx * 0.08 + 0.3);
+        });
+      } catch (e) {}
+    }
+
+    // Real-time Live Clock
+    function updateClock() {
+      const now = new Date();
+      const yr = now.getFullYear();
+      const mo = String(now.getMonth() + 1).padStart(2, '0');
+      const da = String(now.getDate()).padStart(2, '0');
+      const hr = String(now.getHours()).padStart(2, '0');
+      const mi = String(now.getMinutes()).padStart(2, '0');
+      const se = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('liveTime').innerText = `${yr}.${mo}.${da} ${hr}:${mi}:${se} LIVE`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // URL parameter parsing for name
+    function initName() {
+      const params = new URLSearchParams(window.location.search);
+      const nameParam = params.get('name');
+      if (nameParam && nameParam.trim()) {
+        document.getElementById('targetInput').value = nameParam.trim();
+        setName(nameParam.trim());
+      }
+    }
+
+    function applyCustomName() {
+      const val = document.getElementById('targetInput').value.trim();
+      if (!val) return;
+      setName(val);
+      showToast(`뉴스 주인공이 '${val}'(으)로 변경되었습니다.`);
+    }
+
+    function setName(name) {
+      document.querySelectorAll('.target-name').forEach(el => {
+        el.innerText = name;
+      });
+      document.title = `[속보] ${name} 연락두절 사건 긴급 보도 - KBN 뉴스특보`;
+    }
+    initName();
+
+    // Confetti & Particle System
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const particles = [];
+    const colors = ['#e50914', '#0066ff', '#ffd600', '#ffffff', '#38bdf8'];
+
+    function spawnParticles(count = 25) {
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: width / 2,
+          y: height / 2 + 80,
+          size: Math.random() * 7 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          vx: (Math.random() - 0.5) * 14,
+          vy: Math.random() * -12 - 4,
+          rot: Math.random() * 360,
+          rotSpeed: (Math.random() - 0.5) * 10
+        });
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.35;
+        p.rot += p.rotSpeed;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rot * Math.PI) / 180);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+        ctx.restore();
+
+        if (p.y > height) {
+          particles.splice(i, 1);
+          i--;
+        }
+      }
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    // Cheer Clicker Logic
+    let cheerVal = 7770;
+    let beefVal = 1500;
+    const cheerMsgs = [
+      "서류 합격 확률 +5% 상승",
+      "인적성 검사 통과 기운 충전",
+      "면접관 프리패스 호감도 급상승",
+      "핫식스 타우린 파워 200% 완충",
+      "소고기 등심 100g 추가 적립 완료",
+      "취뽀 후 친구들 소맥 말아주기 확정"
+    ];
+
+    function cheerUp() {
+      cheerVal += 150;
+      beefVal += 50;
+      document.getElementById('cheerCount').innerText = `${cheerVal.toLocaleString()} HP`;
+      document.getElementById('beefGram').innerText = `${beefVal.toLocaleString()}g`;
+      document.getElementById('reliefRate').innerText = '100%';
+
+      playNewsJingle();
+      spawnParticles(28);
+
+      const msg = cheerMsgs[Math.floor(Math.random() * cheerMsgs.length)];
+      showToast(msg);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    function shareNews() {
+      const name = document.getElementById('targetInput').value.trim();
+      const currentUrl = window.location.origin + window.location.pathname;
+      const shareUrl = name ? `${currentUrl}?name=${encodeURIComponent(name)}` : currentUrl;
+
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(shareUrl).then(() => {
+          showToast('속보 링크가 복사되었습니다! 친구에게 보내보세요.');
+        }).catch(() => {
+          prompt('아래 링크를 복사하세요:', shareUrl);
+        });
+      } else {
+        prompt('아래 링크를 복사하세요:', shareUrl);
+      }
+    }
+  </script>
+</body>
+</html>
